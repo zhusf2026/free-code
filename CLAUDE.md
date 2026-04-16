@@ -1,47 +1,47 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+本文件为 Claude Code (claude.ai/code) 在此代码库中工作时提供指导。
 
-## Common commands
+## 常用命令
 
 ```bash
-# Install dependencies
+# 安装依赖
 bun install
 
-# Standard build (./cli)
+# 标准构建 (./cli)
 bun run build
 
-# Dev build (./cli-dev)
+# 开发构建 (./cli-dev)
 bun run build:dev
 
-# Dev build with all experimental features (./cli-dev)
+# 包含所有实验功能的开发构建 (./cli-dev)
 bun run build:dev:full
 
-# Compiled build (./dist/cli)
+# 编译构建 (./dist/cli)
 bun run compile
 
-# Run from source without compiling
+# 不编译直接从源码运行
 bun run dev
 ```
 
-Run the built binary with `./cli` or `./cli-dev`. Set `ANTHROPIC_API_KEY` in the environment or use OAuth via `./cli /login`.
+使用 `./cli` 或 `./cli-dev` 运行构建的二进制文件。在环境中设置 `ANTHROPIC_API_KEY` 或通过 `./cli /login` 使用 OAuth。
 
-## High-level architecture
+## 高层架构
 
-- **Entry point/UI loop**: src/entrypoints/cli.tsx bootstraps the CLI, with the main interactive UI in src/screens/REPL.tsx (Ink/React).
-- **Command/tool registries**: src/commands.ts registers slash commands; src/tools.ts registers tool implementations. Implementations live in src/commands/ and src/tools/.
-- **LLM query pipeline**: src/QueryEngine.ts coordinates message flow, tool use, and model invocation.
-- **Core subsystems**:
-  - src/services/: API clients, OAuth/MCP integration, analytics stubs
-  - src/state/: app state store
-  - src/hooks/: React hooks used by UI/flows
-  - src/components/: terminal UI components (Ink)
-  - src/skills/: skill system
-  - src/plugins/: plugin system
-  - src/bridge/: IDE bridge
-  - src/voice/: voice input
-  - src/tasks/: background task management
+- **入口点/UI 循环**：src/entrypoints/cli.tsx 启动 CLI，主交互 UI 位于 src/screens/REPL.tsx (Ink/React)。
+- **命令/工具注册**：src/commands.ts 注册斜杠命令；src/tools.ts 注册工具实现。实现位于 src/commands/ 和 src/tools/。
+- **LLM 查询管道**：src/QueryEngine.ts 协调消息流、工具使用和模型调用。
+- **核心子系统**：
+  - src/services/: API 客户端、OAuth/MCP 集成、分析桩
+  - src/state/: 应用状态存储
+  - src/hooks/: UI/流程使用的 React hooks
+  - src/components/: 终端 UI 组件 (Ink)
+  - src/skills/: 技能系统
+  - src/plugins/: 插件系统
+  - src/bridge/: IDE 桥接
+  - src/voice/: 语音输入
+  - src/tasks/: 后台任务管理
 
-## Build system
+## 构建系统
 
-- scripts/build.ts is the build script and feature-flag bundler. Feature flags are set via build arguments (e.g., `--feature=ULTRAPLAN`) or presets like `--feature-set=dev-full` (see README for details).
+- scripts/build.ts 是构建脚本和特性标志打包器。特性标志通过构建参数设置（如 `--feature=ULTRAPLAN`）或预设如 `--feature-set=dev-full`（详见 README）。
