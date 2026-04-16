@@ -14,7 +14,7 @@
   },
   "scripts": {
     "pull": "git pull",
-    "push": "git add . && git commit -m\"feat:0000 merge:DNP1.8.3\" --no-verify && git push",
+    "push": "git add . && git commit -m\"feat:0000\" --no-verify && git push",
     "build": "bun run ./scripts/build.ts",
     "build:dev": "bun run ./scripts/build.ts --dev",
     "build:dev:full": "bun run ./scripts/build.ts --dev --feature-set=dev-full",
